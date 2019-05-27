@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
+#from pip.req import parse_requirements
 import re, ast
 
 # get version from __version__ variable in document_manager/__init__.py
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
+
+with open(‘requirements.txt’) as f:
+install_requires = f.read().strip().split(’\n’)
 
 with open('document_manager/__init__.py', 'rb') as f:
     version = str(ast.literal_eval(_version_re.search(
@@ -22,5 +25,5 @@ setup(
 	zip_safe=False,
 	include_package_data=True,
 	install_requires=[str(ir.req) for ir in requirements],
-	dependency_links=[str(ir._link) for ir in requirements if ir._link]
+	#dependency_links=[str(ir._link) for ir in requirements if ir._link]
 )
